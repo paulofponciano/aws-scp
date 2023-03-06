@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GP3CreateVolume",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:CreateVolume"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Condition": {
+        "ForAllValues:StringNotEquals": {
+          "ec2:VolumeType": [
+            "gp3"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "GP3RunInstances",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*"
+      ],
+      "Condition": {
+        "ForAllValues:StringNotEquals": {
+          "ec2:VolumeType": [
+            "gp3"
+          ]
+        }
+      }
+    }
+  ]
+}
