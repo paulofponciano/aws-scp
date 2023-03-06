@@ -1,0 +1,93 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EnforceTagName",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "StringNotLike": {
+          "aws:RequestTag/Name": "*"
+        }
+      }
+    },
+    {
+      "Sid": "KeyExactMatchName",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "ForAllValues:StringNotEquals": {
+          "aws:TagKeys": [
+            "Name"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "EnforceTagproductOwner",
+      "Effect": "Deny",
+      "Action": "ec2:RunInstances",
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "StringNotLike": {
+          "aws:RequestTag/productOwner": "*"
+        }
+      }
+    },
+    {
+      "Sid": "KeyExactMatchForproductOwner",
+      "Effect": "Deny",
+      "Action": "ec2:RunInstances",
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "ForAllValues:StringNotEquals": {
+          "aws:TagKeys": [
+            "productOwner"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "EnforceTagenv",
+      "Effect": "Deny",
+      "Action": "ec2:RunInstances",
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "StringNotLike": {
+          "aws:RequestTag/env": "*"
+        }
+      }
+    },
+    {
+      "Sid": "KeyExactMatchForenv",
+      "Effect": "Deny",
+      "Action": "ec2:RunInstances",
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*"
+      ],
+      "Condition": {
+        "ForAllValues:StringNotEquals": {
+          "aws:TagKeys": [
+            "env"
+          ]
+        }
+      }
+    }
+  ]
+}
